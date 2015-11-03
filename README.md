@@ -1,0 +1,2 @@
+Critical Reading NLP is an Natural Language Application that solves the critical reading section of the SAT.
+For information about the project, please see the CriticalReadingNLPProposal.pdf document in the root of this repo.
