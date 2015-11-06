@@ -61,7 +61,6 @@ class Parser:
 
         with open(file_name) as test_file:
             line = test_file.readline()
-            # Check the incoming line and determine which type it is
             while line:
                 line = line.replace('\n', ' ')
 
@@ -71,10 +70,6 @@ class Parser:
                         self.state = States.SECTION
                         section_number = self.get_section_number(line)
                         section = models.sat.Section(section_number)
-                    elif self.state == States.QUESTION:
-                        self.state = States.SECTION
-                    elif self.state == States.SECTION:
-                        pass
                     elif self.state == States.ANSWER:
                         # End of the section, add the questions to a section
                         questions.append(
@@ -123,12 +118,9 @@ class Parser:
                 elif self.match_line(line, self.answer_deliminator):
                     if self.state == States.QUESTION:
                         answers = models.question.Question.answer_dict()
-                        answer_letter, answer_text = self.split_answer(line)
-                        answers[answer_letter] = answer_text
                         self.state = States.ANSWER
-                    elif self.state == States.ANSWER:
-                        answer_letter, answer_text = self.split_answer(line)
-                        answers[answer_letter] = answer_text
+                    answer_letter, answer_text = self.split_answer(line)
+                    answers[answer_letter] = answer_text
 
                 # Saw a passage
                 elif self.match_line(line, self.passage_deliminator):
@@ -160,6 +152,7 @@ class Parser:
                     elif self.state == States.ANSWER:
                         answers[answer_letter] += line.strip()
                 line = test_file.readline()
+
         questions.append(
             models.question.PassageBasedReadingQuestion(
                 passage=passage_text,
