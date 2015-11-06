@@ -84,7 +84,7 @@ class Parser:
                                 choices=answers))
                         question_text = ""
 
-                        section.add_questions(questions)
+                        section.set_questions(questions)
                         sections.append(section)
                         questions = []
                         section_number = self.get_section_number(line)
@@ -166,7 +166,7 @@ class Parser:
                 question=question_text,
                 choices=answers))
         question_text = ""
-        section.add_questions(questions)
+        section.set_questions(questions)
         sections.append(section)
 
         self.state = States.END

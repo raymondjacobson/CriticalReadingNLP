@@ -12,7 +12,7 @@ class Section:
         self.questions = []
         self.number = number
 
-    def add_questions(self, questions):
+    def set_questions(self, questions):
         self.questions = questions
 
 
