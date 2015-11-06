@@ -25,15 +25,16 @@ class Question:
         self.answer = 'a'
         self.selection = random.choice(choices.keys())
 
-    def set_answer(self, answer):
-        assert answer in valid_answers
+    def set_answer(self, question_number, answer):
+        assert answer in self.valid_answers
+        assert self.question.split('. ')[0] == question_number
         self.answer = answer
 
     def set_selection(self, selection):
-        assert selection in valid_answers
+        assert selection in self.valid_answers
         self.selection = selection
 
-    def check_question(self):
+    def check_answer(self):
         '''
         Return whether a question is correctly solved.
         Returns False if the selection is unset.

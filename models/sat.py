@@ -1,5 +1,4 @@
 import re
-from question import Question
 
 
 class Section:
@@ -22,10 +21,24 @@ class SAT:
     '''
     def __init__(self):
         self.sections = []
-        self.section_deliminator = "SECTION"
+        self.scoring_key = {}
 
     def set_sections(self, sections):
         self.sections = sections
+
+    def score(self):
+        raw_score = 0.
+        correct = 0
+        incorrect = 0
+        for section in self.sections:
+            for question in section.questions:
+                if question.check_answer():
+                    correct += 1
+                else:
+                    incorrect += 1
+        raw_score = round(correct - incorrect * 0.25)
+        score = self.scoring_key.get(raw_score, self.scoring_key[-2])
+        return raw_score, score
 
     def __repr__(self):
         output = ""
@@ -34,5 +47,7 @@ class SAT:
             for question in section.questions:
                 output += "Question: " + question.question + "\n"
                 output += "Choices: " + str(question.choices) + "\n"
+                output += "Answer: " + question.answer + "\n"
+                output += "Selection: " + question.selection + "\n"
                 output += "\n"
         return output

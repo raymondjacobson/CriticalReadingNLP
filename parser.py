@@ -173,3 +173,33 @@ class Parser:
         sat_test.set_sections(sections)
 
         return sat_test
+
+    def parse_answer_key(self, sat_test, file_name):
+        '''
+        Load an answer key from file_name. Mandates that the format:
+        1. A
+        2. B
+        4. E
+        (question_number question_answer)
+        '''
+        with open(file_name) as answer_key:
+            for section in sat_test.sections:
+                for question in section.questions:
+                    line = answer_key.readline()
+                    split = line.split('. ')
+                    question_number = split[0]
+                    answer = split[1].strip().lower()
+                    question.set_answer(question_number, answer)
+
+    def parse_scoring_key(self, sat_test, file_name):
+        '''
+        Load a scoring key from file_name. Mandates that the format:
+        67 800
+        66 800
+        65 780
+        (raw_score actual_score)
+        '''
+        with open(file_name) as scoring_key:
+            for line in scoring_key.readlines():
+                split = line.split(' ')
+                sat_test.scoring_key[int(split[0])] = int(split[1].strip('\n'))
