@@ -1,0 +1,1 @@
+'''Sentence completion word similarity'''
