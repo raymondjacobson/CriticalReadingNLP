@@ -57,7 +57,8 @@ Line through the torrent of fraud and obscenity known politely
 5 as “unsolicited bulk e-mail” and colloquially as “spam.”
 In a perverse tribute to the power of the online revolution,
 we are all suddenly getting the same mail: easy weight
-loss, get-rich-quick schemes, etc. The crush of these messages is now numbered in billions per day. “It’s becoming
+loss, get-rich-quick schemes, etc. The crush of these mes-
+sages is now numbered in billions per day. “It’s becoming
 10 a major systems and engineering and network problem,”
 says one e-mail expert. “Spammers are gaining control of
 the Internet.”
