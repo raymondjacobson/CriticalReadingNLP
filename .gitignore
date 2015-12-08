@@ -1,2 +1,5 @@
 .DS_Store
 *.pyc
+text8_model
+text8_*
+treebank_model
