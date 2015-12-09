@@ -1,6 +1,6 @@
 import re
-from question import SentenceCompletionQuestion
-from learning import sc_wordsim
+from question import SentenceCompletionQuestion, PassageBasedReadingQuestion
+from learning import sc_wordsim, passage_sentiwordnet, passage_sim, passage_alchemy_sent
 
 
 class Section:
@@ -48,7 +48,7 @@ class SAT:
         for section in self.sections:
             for question in section.questions:
                 # Check the type of question we are trying to solve
-                if isinstance(question, SentenceCompletionQuestion):
+                """if isinstance(question, SentenceCompletionQuestion):
                     # print question.question
                     # print question.choices
                     guess = sc_wordsim.solve(question.question,
@@ -61,7 +61,21 @@ class SAT:
                     print
                     if question.answer == question.selection:
                         correct += 1
-                    total += 1
+                    total += 1"""
+                if isinstance(question, PassageBasedReadingQuestion):
+                    if 'tone' in question.question or 'mood' in question.question:
+                        guess = passage_sentiwordnet.solve(question.passage,
+                                                           question.question,
+                                                           question.choices)
+                        print guess
+                        guess2 = passage_sim.solve(question.passage,
+                                                   question.question,
+                                                   question.choices)
+                        print guess2
+                        guess3 = passage_alchemy_sent.solve(question.passage,
+                                                            question.question,
+                                                            question.choices)
+                        print guess3
         print correct/total
 
 

@@ -139,7 +139,7 @@ class Parser:
                                     choices=answers))
                         question_text = ""
                         self.state = States.PASSAGE
-                        passage_text += line
+                        passage_text += line + '\n'
                     elif self.state == States.QUESTION:
                         pass
                     start_passage_questions = True
@@ -148,7 +148,7 @@ class Parser:
                     if self.state == States.QUESTION:
                         question_text += line
                     elif self.state == States.PASSAGE:
-                        passage_text += line
+                        passage_text += line + '\n'
                     elif self.state == States.ANSWER:
                         answers[answer_letter] += line.strip()
                 line = test_file.readline()

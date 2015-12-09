@@ -76,5 +76,5 @@ class PassageBasedReadingQuestion(Question):
         self.passage = passage
         Question.__init__(self,
                           question_number=question.split('. ')[0],
-                          question=question.split('. ')[1],
+                          question=". ".join(question.split('. ')[1:]),
                           choices=choices)
