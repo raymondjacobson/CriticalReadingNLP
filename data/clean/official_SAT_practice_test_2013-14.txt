@@ -41,7 +41,7 @@ else can.
 (D) open-mindedness . . complacent
 (E) insightfulness . . self-critical
 
-5. The bearded dragon lizard is a voracious eater, so ------that it will consume as many insects as possible.
+5. The bearded dragon lizard is a voracious eater, so ------ that it will consume as many insects as possible.
 
 (A) abstemious
 (B) cannibalistic
@@ -50,7 +50,7 @@ else can.
 (E) unpalatable
 
 6. Because drummer Tony Williams paved the way for
-later jazz-fusion musicians, he is considered a ------of that style.
+later jazz-fusion musicians, he is considered a ------ of that style.
 
 (A) connoisseur
 (B) revivalist
