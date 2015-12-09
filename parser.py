@@ -165,6 +165,8 @@ class Parser:
         self.state = States.END
         sat_test.set_sections(sections)
 
+        self.__init__()
+
         return sat_test
 
     def parse_answer_key(self, sat_test, file_name):

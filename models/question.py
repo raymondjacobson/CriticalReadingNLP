@@ -19,7 +19,8 @@ class Question:
     '''
     valid_answers = ['a', 'b', 'c', 'd', 'e']
 
-    def __init__(self, question, choices):
+    def __init__(self, question_number, question, choices):
+        self.question_number = question_number
         self.question = question
         self.choices = choices
         self.answer = 'a'
@@ -27,7 +28,7 @@ class Question:
 
     def set_answer(self, question_number, answer):
         assert answer in self.valid_answers
-        assert self.question.split('. ')[0] == question_number
+        assert self.question_number == question_number
         self.answer = answer
 
     def set_selection(self, selection):
@@ -58,7 +59,10 @@ class SentenceCompletionQuestion(Question):
     represents a sentence completion type question.
     '''
     def __init__(self, question, choices):
-        Question.__init__(self, question=question, choices=choices)
+        Question.__init__(self,
+                          question_number=question.split('. ')[0],
+                          question=question.split('. ')[1],
+                          choices=choices)
 
 
 class PassageBasedReadingQuestion(Question):
@@ -70,4 +74,7 @@ class PassageBasedReadingQuestion(Question):
     '''
     def __init__(self, passage, question, choices):
         self.passage = passage
-        Question.__init__(self, question=question, choices=choices)
+        Question.__init__(self,
+                          question_number=question.split('. ')[0],
+                          question=question.split('. ')[1],
+                          choices=choices)

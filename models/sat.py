@@ -1,4 +1,6 @@
 import re
+from question import SentenceCompletionQuestion
+from learning import sc_wordsim
 
 
 class Section:
@@ -39,6 +41,29 @@ class SAT:
         raw_score = round(correct - incorrect * 0.25)
         score = self.scoring_key.get(raw_score, self.scoring_key[-2])
         return raw_score, score
+
+    def solve(self):
+        correct = 0.
+        total = 0.
+        for section in self.sections:
+            for question in section.questions:
+                # Check the type of question we are trying to solve
+                if isinstance(question, SentenceCompletionQuestion):
+                    # print question.question
+                    # print question.choices
+                    guess = sc_wordsim.solve(question.question,
+                                             question.choices)
+                    question.selection = guess
+                    print "answer", question.choices[question.answer]
+                    print "guess", question.choices[question.selection]
+                    print "answer", question.answer, "guess", question.selection, \
+                        question.answer == question.selection
+                    print
+                    if question.answer == question.selection:
+                        correct += 1
+                    total += 1
+        print correct/total
+
 
     def __repr__(self):
         output = ""
