@@ -53,19 +53,19 @@ Passage 1
 I know what your e-mail in-box looks like, and it
 isn’t pretty: a babble of come-ons and lies from hucksters
 and con artists. To find your real e-mail, you must wade
-Line through the torrent of fraud and obscenity known politely
-5 as “unsolicited bulk e-mail” and colloquially as “spam.”
+through the torrent of fraud and obscenity known politely
+as “unsolicited bulk e-mail” and colloquially as “spam.”
 In a perverse tribute to the power of the online revolution,
 we are all suddenly getting the same mail: easy weight
 loss, get-rich-quick schemes, etc. The crush of these mes-
 sages is now numbered in billions per day. “It’s becoming
-10 a major systems and engineering and network problem,”
+a major systems and engineering and network problem,”
 says one e-mail expert. “Spammers are gaining control of
 the Internet.”
 Passage 2
 Many people who hate spam assume that it is protected
 as free speech. Not necessarily so. The United States
-15 Supreme Court has previously ruled that individuals
+Supreme Court has previously ruled that individuals
 may preserve a threshold of privacy. “Nothing in the
 Constitution compels us to listen to or view any unwanted
 communication, whatever its merit,” wrote Chief Justice
@@ -75,7 +75,7 @@ unwanted material into the home of another.” With regard
 to a seemingly similar problem, the Telephone Consumer
 Protection Act of 1991 made it illegal in the United States
 to send unsolicited faxes; why not extend the act to include
-25 unsolicited bulk e-mail?
+unsolicited bulk e-mail?
 
 6. The primary purpose of Passage 1 is to
 
@@ -503,7 +503,7 @@ PASSAGE
 Newspaper editor and political commentator Henry
 Louis Mencken was a force of nature, brushing aside
 all objects animal and mineral in his headlong rush
-Line to the publicity that surely awaited him. He seized
+to the publicity that surely awaited him. He seized
 each day, shook it to within an inch of its life, and
 then gaily went on to the next. No matter where his
 writing appeared, it was quoted widely, his pungently
@@ -533,7 +533,7 @@ PASSAGE
 The ability to see the situation as your opponents see it,
 as difficult as it may be, is one of the most important skills
 that you can possess as a negotiator. You must know more
-Line than simply that they see things differently. It is not
+than simply that they see things differently. It is not
 enough to study them like beetles under a microscope;
 you need to know what it feels like to be a beetle. To
 accomplish this you should be prepared to withhold
