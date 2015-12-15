@@ -1,6 +1,6 @@
 import re
 from question import SentenceCompletionQuestion, PassageBasedReadingQuestion
-from learning import sc_wordsim, passage_sentiwordnet, passage_sim, passage_alchemy_sent
+from learning import lsa_stopwords_triggerwords, passage_sentiwordnet, passage_sim, passage_alchemy_sent
 
 
 class Section:
@@ -48,10 +48,9 @@ class SAT:
         for section in self.sections:
             for question in section.questions:
                 # Check the type of question we are trying to solve
-                """if isinstance(question, SentenceCompletionQuestion):
-                    # print question.question
-                    # print question.choices
-                    guess = sc_wordsim.solve(question.question,
+                if isinstance(question, SentenceCompletionQuestion):
+                    print "TYPE: SENTENCE COMPLETION"
+                    guess = lsa_stopwords_triggerwords.solve(question.question,
                                              question.choices)
                     question.selection = guess
                     print "answer", question.choices[question.answer]
@@ -61,22 +60,39 @@ class SAT:
                     print
                     if question.answer == question.selection:
                         correct += 1
-                    total += 1"""
+                    total += 1
                 if isinstance(question, PassageBasedReadingQuestion):
                     if 'tone' in question.question or 'mood' in question.question:
-                        guess = passage_sentiwordnet.solve(question.passage,
+                        # print question.passage
+                        print "TYPE: PASSAGE BASED (TONE)"
+                        qpass = question.passage
+                        guess1 = passage_sentiwordnet.solve(qpass,
                                                            question.question,
                                                            question.choices)
-                        print guess
-                        guess2 = passage_sim.solve(question.passage,
+                        guess2 = passage_sim.solve(qpass,
                                                    question.question,
                                                    question.choices)
-                        print guess2
-                        guess3 = passage_alchemy_sent.solve(question.passage,
+                        guess3 = passage_alchemy_sent.solve(qpass,
                                                             question.question,
                                                             question.choices)
-                        print guess3
-        print correct/total
+                        sum_for_keys = {}
+                        for choice in question.choices.keys():
+                            sum_for_keys[choice] = 0
+                            for guess in [guess1, guess2, guess3]:
+                                for g in range(len(guess)):
+                                    if choice == guess[g][0]:
+                                        sum_for_keys[choice] += g
+                        question.selection = min(sum_for_keys, key=sum_for_keys.get)
+                        # print "\n\n\n\n"
+                        print "answer", question.choices[question.answer]
+                        print "guess", question.choices[question.selection]
+                        print "answer", question.answer, "guess", question.selection, \
+                            question.answer == question.selection
+                        print
+                        if question.answer == question.selection:
+                            correct += 1
+                        total += 1
+        print "correct, attempts, percent", correct, total, correct/total
 
 
     def __repr__(self):

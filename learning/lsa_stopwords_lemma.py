@@ -6,6 +6,25 @@ import gensim
 import operator
 import sys
 import numpy as np
+from nltk.corpus import wordnet
+
+
+def prune_list(lis, model):
+    new_lis = []
+    for item in lis:
+        if item in model:
+            new_lis.append(item)
+    return new_lis
+
+
+def get_syn(lis, model):
+    output_lemmas = set([])
+    for l in lis:
+        for synset in wordnet.synsets(l):
+            for lemma in synset.lemmas():
+                output_lemmas.add(lemma.name())
+    output_lemmas = prune_list(output_lemmas, model)
+    return output_lemmas
 
 
 def solve(sentence, answers):
@@ -24,11 +43,14 @@ def solve(sentence, answers):
     # print sentence_rm_stopwords
     # sentence_rm_stopwords = sentence_rm_stopwords[min_bound: max_bound]
     keywords = [i for i in sentence_rm_stopwords if i in model]
-    keyword_vectors = [model[keyword] for keyword in keywords]
+    
+    keyword_lemmas = get_syn(keywords, model)
+
+    keyword_vectors = [model[keyword] for keyword in keyword_lemmas]
 
     scores = {}
     for answer_key, answer in answers.iteritems():
-        # print answer
+        print answer
         dist = 0
         scoring = []
         for keyword in keywords:
@@ -37,17 +59,27 @@ def solve(sentence, answers):
             strip_answer_split = []
             for a in answer_split:
                 a = a.strip()
-                strip_answer_split.append(a)
-                if a not in model:
-                    b = True
-            if b:
-                break
-            scoring.append(model.n_similarity(strip_answer_split, [keyword]))
+                a_split = a.split(' ')
+                for a_i in a_split:
+                    if a_i != 'a' and a_i != 'an':
+                        strip_answer_split.append(a_i)
+            print "strip ans split", strip_answer_split
+                # if a not in model:
+                #     b = True
+            # if b:
+            #     break
+            answer_lemmas = get_syn(strip_answer_split, model)
+            print answer_lemmas
+            if len(answer_lemmas) == 0:
+                break 
+            scoring.append(model.n_similarity(answer_lemmas, keyword_lemmas))
+        print scoring
         scoring.sort()
         top_n = 5
         # print scoring[-top_n:-1]
         scores[answer_key] = (sum(scoring[-top_n:-1])/(top_n-1))
         # print "\n"
+    print scores
 
     best_choice = max(scores.iteritems(), key=operator.itemgetter(1))[0]
     # for i in answers.keys():

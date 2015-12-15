@@ -20,9 +20,10 @@ if __name__ == "__main__":
     # parser.parse_scoring_key(
     #     sample_test2,
     #     'data/clean/official_SAT_practice_test_2013-14_scoring.txt')
+    # print sample_test2
     # sample_test2.solve()
 
     # print sample_test
 
-    # print sample_test.score()
+    print sample_test.score()
     # print sample_test2.score()

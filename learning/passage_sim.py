@@ -15,17 +15,34 @@ def prune_list(lis, model):
     return new_lis
 
 
-def solve(passage, question, choices):
-    model = gensim.models.Word2Vec.load("./learning/models/text8_model")
-    line_number = int(re.match(r"^[\s\S]*line ([0-9]{1,3})", question).group(1))
+def get_relevant_text(passage, question):
+    reg = re.match(r"^[\s\S]*line ([0-9]{1,3})", question)
+    if reg == None:
+        reg = re.match(r"^[\s\S]*lines ([0-9]{1,2}-[0-9]{1,2})", question).group(1)
+        reg = reg.split('-')[0]
+    else:
+        reg = reg.group(1)
+    line_number = int(reg)
+    pref = False
+    if "PREFACE" in passage:
+        pref = True
     p_split = passage.replace("PREFACE", "").replace("PASSAGE", "").strip('\n').strip().split('\n')
-    for line in xrange(len(p_split)):
-        if p_split[line].strip() == "":
-            p_split = p_split[line+1:]
-            break
+    if pref:
+        for line in xrange(len(p_split)):
+            if p_split[line].strip() == "":
+                p_split = p_split[line+1:]
+                break
+    print line_number, p_split
     relevant_text = p_split[line_number-1]
     if '.' not in relevant_text:
         relevant_text += p_split[line_number]
+    return relevant_text
+
+
+
+def solve(passage, question, choices):
+    model = gensim.models.Word2Vec.load("./learning/models/text8_model")
+    relevant_text = get_relevant_text(passage, question)
 
     sent_split = relevant_text.strip('.').split(' ')
     pruned_sent = prune_list(sent_split, model)
